@@ -59,6 +59,7 @@ int _printf(const char *format, ...)
 int _printf_with_spec(va_list argv, char conversion_spec)
 {
 	int count;
+	char *str;
 
 	switch (conversion_spec)
 	{
@@ -84,7 +85,8 @@ int _printf_with_spec(va_list argv, char conversion_spec)
 			count = _putchar(va_arg(argv, int));
 			break;
 		case 's':
-			count = _putstr(va_arg(argv, char *));
+			str = va_arg(argv, char *);
+			count = _putstr(!str ? "(null)" : str);
 			break;
 		case 'p':
 			count = _putptr(va_arg(argv, unsigned long int));
