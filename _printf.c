@@ -8,40 +8,45 @@
  */
 int _printf(const char *format, ...)
 {
-	int len = 0;
-	int is_spec = 0;
+	int format_len = 0;
+	int current_count = 0;
+	int count = 0;
 	char current_char;
 	char conversion_spec;
 	va_list argv;
 
 	va_start(argv, format);
 
-	while (*(format + len))
+	while (*(format + format_len))
 	{
-		current_char = *(format + len);
-		if (current_char == '%' && *(format + len + 1))
-		{
-			conversion_spec = *(format + len + 1);
-			is_spec = _printf_with_spec(argv, conversion_spec);
+		current_char = *(format + format_len);
+		conversion_spec = *(format + format_len + 1);
 
-			if (!is_spec)
-			{
-				_putchar('%');
-				len++;
-				continue;
-			}
-			len++;
+		if (current_char != '%' || !conversion_spec)
+		{
+			_putchar(current_char);
+			count++;
+			format_len++;
+			continue;
+		}
+
+		current_count = _printf_with_spec(argv, conversion_spec);
+		if (!current_count)
+		{
+			_putchar('%');
+			count++;
 		}
 		else
 		{
-			_putchar(current_char);
+			count += current_count;
+			format_len++;
 		}
 
-		len++;
+		format_len++;
 	}
 
 	va_end(argv);
-	return (--len);
+	return (count);
 }
 
 /**
@@ -53,41 +58,43 @@ int _printf(const char *format, ...)
  */
 int _printf_with_spec(va_list argv, char conversion_spec)
 {
+	int count;
+
 	switch (conversion_spec)
 	{
 		case 'd':
-			_printf_int(va_arg(argv, int));
+			count = _printf_int(va_arg(argv, int));
 			break;
 		case 'i':
-			_printf_int(va_arg(argv, int));
+			count = _printf_int(va_arg(argv, int));
 			break;
 		case 'u':
-			_printf_uint(va_arg(argv, unsigned int));
+			count = _printf_uint(va_arg(argv, unsigned int));
 			break;
 		case 'o':
-			_printf_octal(va_arg(argv, unsigned int));
+			count = _printf_octal(va_arg(argv, unsigned int));
 			break;
 		case 'x':
-			_printf_hex(va_arg(argv, unsigned int), 0);
+			count = _printf_hex(va_arg(argv, unsigned int), 0);
 			break;
 		case 'X':
-			_printf_hex(va_arg(argv, unsigned int), 1);
+			count = _printf_hex(va_arg(argv, unsigned int), 1);
 			break;
 		case 'c':
-			_putchar(va_arg(argv, int));
+			count = _putchar(va_arg(argv, int));
 			break;
 		case 's':
-			_putstr(va_arg(argv, char *));
+			count = _putstr(va_arg(argv, char *));
 			break;
 		case 'p':
-			_putptr(va_arg(argv, unsigned long int));
+			count = _putptr(va_arg(argv, unsigned long int));
 			break;
 		case '%':
-			_putchar('%');
+			count = _putchar('%');
 			break;
 		default:
 			return (0);
 	}
 
-	return (1);
+	return (count);
 }

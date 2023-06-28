@@ -8,12 +8,12 @@
 
 int _printf(const char *format, ...);
 int _printf_with_spec(va_list argv, char conversion_spec);
-void _printf_int(int n);
-void _printf_uint(unsigned int n);
-void _printf_octal(unsigned int n);
-void _printf_hex(unsigned long int n, short int u);
+int _printf_int(int n);
+int _printf_uint(unsigned int n);
+int _printf_octal(unsigned int n);
+int _printf_hex(unsigned long int n, short int u);
 int _putchar(char c);
-void _putstr(char *s);
-void _putptr(unsigned long int p);
+int _putstr(char *s);
+int _putptr(unsigned long int p);
 
 #endif

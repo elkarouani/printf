@@ -14,21 +14,31 @@ int _putchar(char c)
 /**
  * _putstr - prints a string
  * @s: the string to be printed
+ *
+ * Return: length of the string
  */
-void _putstr(char *s)
+int _putstr(char *s)
 {
 	int len = 0;
 
 	while (*(s + len))
 		_putchar(*(s + len++));
+
+	return (len);
 }
 
 /**
  * _putptr - prints a pointer address
  * @p: pointer address to be printed
+ *
+ * Return: number of characters printed
  */
-void _putptr(unsigned long int p)
+int _putptr(unsigned long int p)
 {
-	_putstr("0x");
-	_printf_hex(p, 0);
+	int count = 0;
+
+	count += _putstr("0x");
+	count += _printf_hex(p, 0);
+
+	return (count);
 }
