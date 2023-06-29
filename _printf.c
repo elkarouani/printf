@@ -27,9 +27,11 @@ int _printf(const char *format, ...)
 
 		if (current_char != '%' || !conversion_spec)
 		{
-			_putchar(current_char);
 			if (current_char != '%')
+			{
+				_putchar(current_char);
 				count++;
+			}
 			format_len++;
 			continue;
 		}
