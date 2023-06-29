@@ -18,5 +18,6 @@ int _printf_binary(unsigned int n);
 int _putchar(char c);
 int _putstr(char *s);
 int _putptr(unsigned long int p);
+int _putrstr(char *s);
 
 #endif

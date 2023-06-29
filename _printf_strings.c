@@ -48,3 +48,22 @@ int _putptr(unsigned long int p)
 
 	return (count);
 }
+
+/**
+ * _putrstr - prints a string in reverse
+ * @s: the string to be printed
+ *
+ * Return: number of characters printed
+ */
+int _putrstr(char *s)
+{
+	int len = 0, i = 0;
+
+	while (*(s + len))
+		len++;
+
+	while (i > 0)
+		_putchar(*(s + len - i++));
+
+	return (len);
+}

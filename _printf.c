@@ -110,6 +110,9 @@ int _printf_with_strings_spec(va_list argv, char spec)
 		case '%':
 			count = _putchar('%');
 			break;
+		case 'r':
+			count = _putrstr(va_arg(argv, char *));
+			break;
 	}
 
 	return (count);
