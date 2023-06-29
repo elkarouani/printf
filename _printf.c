@@ -8,23 +8,17 @@
  */
 int _printf(const char *format, ...)
 {
-	int format_len = 0;
-	int current_count = 0;
-	int count = 0;
-	char current_char;
-	char conversion_spec;
+	int format_len = 0, current_count = 0, count = 0;
+	char current_char, conversion_spec;
 	va_list argv;
 
 	va_start(argv, format);
-
 	if (!format || (*format == '%' && !*(format + 1)))
 		count = -1;
-
 	while (format && *(format + format_len))
 	{
 		current_char = *(format + format_len);
 		conversion_spec = *(format + format_len + 1);
-
 		if (current_char != '%' || !conversion_spec)
 		{
 			if (current_char != '%')
@@ -35,9 +29,7 @@ int _printf(const char *format, ...)
 			format_len++;
 			continue;
 		}
-
 		current_count = _printf_with_spec(argv, conversion_spec);
-		
 		if (current_count == -1)
 		{
 			_putchar('%');
@@ -48,10 +40,8 @@ int _printf(const char *format, ...)
 			count += current_count;
 			format_len++;
 		}
-
 		format_len++;
 	}
-
 	va_end(argv);
 	return (count);
 }
@@ -104,6 +94,5 @@ int _printf_with_spec(va_list argv, char conversion_spec)
 		default:
 			return (-1);
 	}
-
 	return (count);
 }
