@@ -95,7 +95,7 @@ int _printf_hex(unsigned long int n, short int u)
 	int digits = 1;
 	unsigned long int n1 = n;
 
-	while (n / 16)
+	while (n1 / 16)
 	{
 		digits++;
 		n1 = n1 / 16;
