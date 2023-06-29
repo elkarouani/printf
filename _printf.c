@@ -31,7 +31,8 @@ int _printf(const char *format, ...)
 		}
 
 		current_count = _printf_with_spec(argv, conversion_spec);
-		if (!current_count)
+		
+		if (current_count == -1)
 		{
 			_putchar('%');
 			count++;
@@ -58,7 +59,7 @@ int _printf(const char *format, ...)
  */
 int _printf_with_spec(va_list argv, char conversion_spec)
 {
-	int count;
+	int count = 0;
 	char *str;
 
 	switch (conversion_spec)
@@ -95,7 +96,7 @@ int _printf_with_spec(va_list argv, char conversion_spec)
 			count = _putchar('%');
 			break;
 		default:
-			return (0);
+			return (-1);
 	}
 
 	return (count);
