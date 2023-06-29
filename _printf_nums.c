@@ -9,7 +9,7 @@
 int _printf_int(int n)
 {
 	unsigned int n1;
-	int digits = 0;
+	int digits = 1;
 
 	if (n < 0)
 	{
@@ -18,10 +18,16 @@ int _printf_int(int n)
 	}
 	n1 = n < 0 ? -n : n;
 
+	while (n1 / 10)
+	{
+		digits++;
+		n1 = n1 / 10;
+	}
+
+	n1 = n < 0 ? -n : n;
 	if (n1 / 10)
 		_printf_int(n1 / 10);
 
-	digits++;
 	_putchar((n1 % 10) + 48);
 
 	return (digits);
