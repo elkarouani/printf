@@ -85,7 +85,7 @@ int _printf_with_nums_spec(va_list argv, char spec)
 
 /**
  * _printf_with_strings_spec - prints with strings spec
- * @args: arguments list
+ * @argv: arguments list
  * @spec: conversion specifier used
  *
  * Return: printed characters count
