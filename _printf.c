@@ -47,18 +47,17 @@ int _printf(const char *format, ...)
 }
 
 /**
- * _printf_with_spec - prints using a conversion specifier
+ * _printf_with_nums_spec - prints using nums spec
  * @argv: arguments list
- * @conversion_spec: conversion specifier used
+ * @spec: conversion specifier used
  *
- * Return: 1 if conversion spec is correct, 0 otherwise
+ * Return: printed characters count, -1 otherwise
  */
-int _printf_with_spec(va_list argv, char conversion_spec)
+int _printf_with_nums_spec(va_list argv, char spec)
 {
 	int count = -1;
-	char *str;
 
-	switch (conversion_spec)
+	switch (spec)
 	{
 		case 'd':
 		case 'i':
@@ -76,6 +75,28 @@ int _printf_with_spec(va_list argv, char conversion_spec)
 		case 'X':
 			count = _printf_hex(va_arg(argv, unsigned int), 1);
 			break;
+		case 'b':
+			count = _printf_binary(va_arg(argv, unsigned int));
+			break;
+	}
+
+	return (count);
+}
+
+/**
+ * _printf_with_strings_spec - prints with strings spec
+ * @args: arguments list
+ * @spec: conversion specifier used
+ *
+ * Return: printed characters count
+ */
+int _printf_with_strings_spec(va_list argv, char spec)
+{
+	int count = -1;
+	char *str;
+
+	switch (spec)
+	{
 		case 'c':
 			count = _putchar(va_arg(argv, int));
 			break;
@@ -89,9 +110,25 @@ int _printf_with_spec(va_list argv, char conversion_spec)
 		case '%':
 			count = _putchar('%');
 			break;
-		case 'b':
-			count = _printf_binary(va_arg(argv, unsigned int));
-			break;
 	}
+
+	return (count);
+}
+
+/**
+ * _printf_with_spec - prints using a conversion specifier
+ * @argv: arguments list
+ * @conversion_spec: conversion specifier used
+ *
+ * Return: printed characters count, -1 otherwise
+ */
+int _printf_with_spec(va_list argv, char conversion_spec)
+{
+	int count = -1;
+
+	count = _printf_with_nums_spec(argv, conversion_spec);
+	if (count == -1)
+		count = _printf_with_strings_spec(argv, conversion_spec);
+
 	return (count);
 }
