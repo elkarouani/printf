@@ -17,7 +17,7 @@ int _printf(const char *format, ...)
 
 	va_start(argv, format);
 
-	while (*(format + format_len))
+	while (format && *(format + format_len))
 	{
 		current_char = *(format + format_len);
 		conversion_spec = *(format + format_len + 1);
