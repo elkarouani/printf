@@ -55,14 +55,12 @@ int _printf(const char *format, ...)
  */
 int _printf_with_spec(va_list argv, char conversion_spec)
 {
-	int count = 0;
+	int count = -1;
 	char *str;
 
 	switch (conversion_spec)
 	{
 		case 'd':
-			count = _printf_int(va_arg(argv, int));
-			break;
 		case 'i':
 			count = _printf_int(va_arg(argv, int));
 			break;
@@ -91,8 +89,9 @@ int _printf_with_spec(va_list argv, char conversion_spec)
 		case '%':
 			count = _putchar('%');
 			break;
-		default:
-			return (-1);
+		case 'b':
+			count = _printf_binary(va_arg(argv, unsigned int));
+			break;
 	}
 	return (count);
 }

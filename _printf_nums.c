@@ -93,3 +93,27 @@ int _printf_hex(unsigned long int n, short int u)
 
 	return (digits);
 }
+
+/**
+ * _printf_binary - prints a binary number
+ * @n: the number to be printed its binary conversion
+ *
+ * Return: number of digits printed
+ */
+int _printf_binary(unsigned int n)
+{
+	int digits = 1;
+	unsigned int n1 = n;
+
+	while (n1 / 2)
+	{
+		digits++;
+		n1 = n1 / 2;
+	}
+
+	if (n / 2)
+		_printf_binary(n / 2);
+	_putchar((n % 2) + 48);
+
+	return (digits);
+}
