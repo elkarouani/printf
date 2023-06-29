@@ -38,7 +38,11 @@ int _putptr(unsigned long int p)
 	int count = 0;
 
 	count += _putstr("0x");
-	count += _printf_hex(p, 0);
+
+	if (p)
+		count += _printf_hex(p, 0);
+	else
+		count += _putchar('0');
 
 	return (count);
 }
