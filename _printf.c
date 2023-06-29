@@ -17,7 +17,7 @@ int _printf(const char *format, ...)
 
 	va_start(argv, format);
 
-	if (!format || (*format == '%' && !*(format + 1)))
+	if (!format)
 		count = -1;
 
 	while (format && *(format + format_len))
@@ -28,7 +28,6 @@ int _printf(const char *format, ...)
 		if (current_char != '%' || !conversion_spec)
 		{
 			_putchar(current_char);
-			count++;
 			format_len++;
 			continue;
 		}
