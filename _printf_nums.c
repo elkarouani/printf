@@ -41,12 +41,18 @@ int _printf_int(int n)
  */
 int _printf_uint(unsigned int n)
 {
-	int digits = 0;
+	int digits = 1;
+	unsigned int n1 = n;
+
+	while (n1 / 10)
+	{
+		digits++;
+		n1 = n1 / 10;
+	}
 
 	if (n / 10)
 		_printf_uint(n / 10);
 
-	digits++;
 	_putchar((n % 10) + 48);
 
 	return (digits);
@@ -60,12 +66,18 @@ int _printf_uint(unsigned int n)
  */
 int _printf_octal(unsigned int n)
 {
-	int digits = 0;
+	int digits = 1;
+	unsigned int n1 = n;
+
+	while (n1 / 8)
+	{
+		digits++;
+		n1 = n1 / 8;
+	}
 
 	if (n / 8)
 		_printf_octal(n / 8);
 
-	digits++;
 	_putchar((n % 8) + 48);
 
 	return (digits);
@@ -80,12 +92,18 @@ int _printf_octal(unsigned int n)
  */
 int _printf_hex(unsigned long int n, short int u)
 {
-	int digits = 0;
+	int digits = 1;
+	unsigned long int n1 = n;
+
+	while (n / 16)
+	{
+		digits++;
+		n1 = n1 / 16;
+	}
 
 	if (n / 16)
 		_printf_hex(n / 16, u);
 
-	digits++;
 	if ((n % 16) < 10)
 		_putchar((n % 16) + 48);
 	else
