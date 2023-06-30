@@ -39,10 +39,37 @@ int _printf(const char *format, ...)
 		{
 			count += current_count;
 			format_len++;
+			if (conversion_spec == '+')
+				format_len++;
 		}
 		format_len++;
 	}
 	va_end(argv);
+	return (count);
+}
+
+/**
+ * _printf_with_flags - prints using flags
+ * @argv: arguments list
+ * @flag: additional flag used
+ *
+ * Return: printed characters count, -1 otherwise
+ */
+int _printf_with_flags(va_list argv, char flag)
+{
+	int count = 0;
+
+	switch (flag)
+	{
+		case '+':
+			count += _putchar('+');
+			count += _printf_int(va_arg(argv, int));
+			break;
+		default:
+			count = -1;
+			break;
+	}
+
 	return (count);
 }
 
@@ -136,7 +163,9 @@ int _printf_with_spec(va_list argv, char conversion_spec)
 {
 	int count = -1;
 
-	count = _printf_with_nums_spec(argv, conversion_spec);
+	count = _printf_with_flags(argv, conversion_spec);
+	if (count == -1)
+		count = _printf_with_nums_spec(argv, conversion_spec);
 	if (count == -1)
 		count = _printf_with_strings_spec(argv, conversion_spec);
 
