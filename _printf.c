@@ -78,8 +78,10 @@ int _printf_with_flags(va_list argv, char flag)
 			count += _printf_int(number);
 			break;
 		case '#':
-			count += _putchar('0');
-			count += _printf_octal(va_arg(argv, unsigned int));
+			number = va_arg(argv, unsigned int);
+			if (number != 0)
+				count += _putchar('0');
+			count += _printf_octal(number);
 			break;
 		default:
 			count = -1;
