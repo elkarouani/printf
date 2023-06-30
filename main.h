@@ -22,5 +22,6 @@ int _putptr(unsigned long int p);
 int _putrstr(char *s);
 int _putrot13str(char *s);
 int count_hex(unsigned long int n);
+int is_flag(char spec);
 
 #endif

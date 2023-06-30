@@ -39,7 +39,7 @@ int _printf(const char *format, ...)
 		{
 			count += current_count;
 			format_len++;
-			if (conversion_spec == '+')
+			if (is_flag(conversion_spec))
 				format_len++;
 		}
 		format_len++;
@@ -67,6 +67,10 @@ int _printf_with_flags(va_list argv, char flag)
 			if (number >= 0)
 				count += _putchar('+');
 			count += _printf_int(number);
+			break;
+		case ' ':
+			count += _putchar(' ');
+			count += _printf_int(va_arg(argv, int));
 			break;
 		default:
 			count = -1;
