@@ -57,13 +57,13 @@ int _putptr(unsigned long int p)
  */
 int _putrstr(char *s)
 {
-	int len = 1, i = 0;
+	int len = 0, count = 0;
 
 	while (*(s + len))
 		len++;
 
-	while ((len - i) > -1)
-		_putchar(*(s + len - i++));
+	while (len >= 0)
+		count += _putchar(*(s + len--));
 
-	return (len + 1);
+	return (count + 1);
 }
