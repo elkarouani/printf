@@ -8,7 +8,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int format_len = 0, current_count = 0, count = 0;
+	int format_len = 0, count1 = 0, count = 0;
 	char current_char, conversion_spec, after_spec;
 	va_list argv;
 
@@ -30,15 +30,15 @@ int _printf(const char *format, ...)
 			format_len++;
 			continue;
 		}
-		current_count = _printf_with_spec(argv, conversion_spec);
-		if (current_count == -1)
+		count1 = _printf_with_spec(argv, conversion_spec, after_spec);
+		if (count1 == -1)
 		{
 			_putchar('%');
 			count++;
 		}
 		else
 		{
-			count += current_count;
+			count += count1;
 			format_len++;
 			if (is_flag(conversion_spec) && !is_flag(after_spec))
 				format_len++;
@@ -55,10 +55,11 @@ int _printf(const char *format, ...)
  * _printf_with_flags - prints using flags
  * @argv: arguments list
  * @flag: additional flag used
+ * @spec: spec used
  *
  * Return: printed characters count, -1 otherwise
  */
-int _printf_with_flags(va_list argv, char flag)
+int _printf_with_flags(va_list argv, char flag, char spec)
 {
 	int count = 0;
 	int number;
@@ -81,7 +82,12 @@ int _printf_with_flags(va_list argv, char flag)
 			number = va_arg(argv, unsigned int);
 			if (number != 0)
 				count += _putchar('0');
-			count += _printf_octal(number);
+			if (spec == 'o')
+				count += _printf_octal(number);
+			if (spec == 'x')
+				count += _printf_hex(number, 0);
+			if (spec == 'X')
+				count += _printf_hex(number, 1);
 			break;
 		default:
 			count = -1;
@@ -174,14 +180,15 @@ int _printf_with_strings_spec(va_list argv, char spec)
  * _printf_with_spec - prints using a conversion specifier
  * @argv: arguments list
  * @conversion_spec: conversion specifier used
+ * @after_spec: after conversion specifier used
  *
  * Return: printed characters count, -1 otherwise
  */
-int _printf_with_spec(va_list argv, char conversion_spec)
+int _printf_with_spec(va_list argv, char conversion_spec, char after_spec)
 {
 	int count = -1;
 
-	count = _printf_with_flags(argv, conversion_spec);
+	count = _printf_with_flags(argv, conversion_spec, after_spec);
 	if (count == -1)
 		count = _printf_with_nums_spec(argv, conversion_spec);
 	if (count == -1)

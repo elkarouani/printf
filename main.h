@@ -7,8 +7,8 @@
 #include <limits.h>
 
 int _printf(const char *format, ...);
-int _printf_with_spec(va_list argv, char conversion_spec);
-int _printf_with_flags(va_list argv, char conversion_spec);
+int _printf_with_spec(va_list argv, char conversion_spec, char after_spec);
+int _printf_with_flags(va_list argv, char flag, char spec);
 int _printf_with_nums_spec(va_list argv, char spec);
 int _printf_with_strings_spec(va_list argv, char spec);
 int _printf_int(int n);
