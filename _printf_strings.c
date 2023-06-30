@@ -30,9 +30,9 @@ int _putstr(char *s, int npc_to_hex)
 			count += _putchar(*(s + len++));
 		else
 		{
-			count += _putchar('\\');
-			count += _putchar('x');
-			count += _putchar('0');
+			count += _putstr("\\x", 0);
+			if (count_hex(*(s + len)) == 1)
+				count += _putchar('0');
 			count += _printf_hex(*(s + len++), 1);
 		}
 	}

@@ -20,5 +20,6 @@ int _putstr(char *s, int npc_to_hex);
 int _putptr(unsigned long int p);
 int _putrstr(char *s);
 int _putrot13str(char *s);
+int count_hex(unsigned long int n);
 
 #endif
