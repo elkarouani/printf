@@ -80,8 +80,6 @@ int _printf_with_flags(va_list argv, char flag, char spec)
 			break;
 		case '#':
 			number = va_arg(argv, unsigned int);
-			if (number != 0)
-				count += _putchar('0');
 			if (spec == 'o')
 			{
 				if (number != 0)
