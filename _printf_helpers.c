@@ -32,6 +32,8 @@ int is_flag(char spec)
 		return (1);
 	if (spec == ' ')
 		return (1);
+	if (spec == '#')
+		return (1);
 
 	return (0);
 }
