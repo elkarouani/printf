@@ -102,7 +102,11 @@ int _printf_with_strings_spec(va_list argv, char spec)
 			break;
 		case 's':
 			str = va_arg(argv, char *);
-			count = _putstr(!str ? "(null)" : str);
+			count = _putstr(!str ? "(null)" : str, 0);
+			break;
+		case 'S':
+			str = va_arg(argv, char *);
+			count = _putstr(!str ? "(null)" : str, 1);
 			break;
 		case 'p':
 			count = _putptr(va_arg(argv, unsigned long int));

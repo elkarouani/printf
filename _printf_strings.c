@@ -14,17 +14,30 @@ int _putchar(char c)
 /**
  * _putstr - prints a string
  * @s: the string to be printed
+ * @npc_to_hex : can non printable chars be in hex
  *
  * Return: length of the string
  */
-int _putstr(char *s)
+int _putstr(char *s, int npc_to_hex)
 {
-	int len = 0;
+	int len = 0, count = 0;
 
 	while (*(s + len))
-		_putchar(*(s + len++));
+	{
+		if (!npc_to_hex)
+			count += _putchar(*(s + len++));
+		else if (*(s + len) >= 32 && *(s + len) < 127)
+			count += _putchar(*(s + len++));
+		else
+		{
+			count += _putchar('\\');
+			count += _putchar('x');
+			count += _putchar('0');
+			count += _printf_hex(*(s + len++), 1);
+		}
+	}
 
-	return (len);
+	return (count);
 }
 
 /**
@@ -39,11 +52,11 @@ int _putptr(unsigned long int p)
 
 	if (!p)
 	{
-		count += _putstr("(nil)");
+		count += _putstr("(nil)", 0);
 		return (count);
 	}
 
-	count += _putstr("0x");
+	count += _putstr("0x", 0);
 	count += _printf_hex(p, 0);
 
 	return (count);

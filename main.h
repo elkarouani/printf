@@ -16,7 +16,7 @@ int _printf_octal(unsigned int n);
 int _printf_hex(unsigned long int n, short int u);
 int _printf_binary(unsigned int n);
 int _putchar(char c);
-int _putstr(char *s);
+int _putstr(char *s, int npc_to_hex);
 int _putptr(unsigned long int p);
 int _putrstr(char *s);
 int _putrot13str(char *s);
