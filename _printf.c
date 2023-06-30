@@ -79,24 +79,12 @@ int _printf_with_flags(va_list argv, char flag, char spec)
 			count += _printf_int(number);
 			break;
 		case '#':
-			number = va_arg(argv, unsigned int);
+			number = va_arg(argv, int);
 			if (spec == 'o')
 			{
 				if (number != 0)
 					count += _putchar('0');
 				count += _printf_octal(number);
-			}
-			if (spec == 'x')
-			{
-				if (number != 0)
-					count += _putstr("0x", 0);
-				count += _printf_hex(number, 0);
-			}
-			if (spec == 'X')
-			{
-				if (number != 0)
-					count += _putstr("0X", 0);
-				count += _printf_hex(number, 1);
 			}
 			break;
 		default:
