@@ -69,8 +69,10 @@ int _printf_with_flags(va_list argv, char flag)
 			count += _printf_int(number);
 			break;
 		case ' ':
-			count += _putchar(' ');
-			count += _printf_int(va_arg(argv, int));
+			number = va_arg(argv, int);
+			if (number >= 0)
+				count += _putchar(' ');
+			count += _printf_int(number);
 			break;
 		default:
 			count = -1;
