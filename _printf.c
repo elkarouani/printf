@@ -83,11 +83,23 @@ int _printf_with_flags(va_list argv, char flag, char spec)
 			if (number != 0)
 				count += _putchar('0');
 			if (spec == 'o')
+			{
+				if (number != 0)
+					count += _putchar('0');
 				count += _printf_octal(number);
+			}
 			if (spec == 'x')
+			{
+				if (number != 0)
+					count += _putstr("0x", 0);
 				count += _printf_hex(number, 0);
+			}
 			if (spec == 'X')
+			{
+				if (number != 0)
+					count += _putstr("0X", 0);
 				count += _printf_hex(number, 1);
+			}
 			break;
 		default:
 			count = -1;
