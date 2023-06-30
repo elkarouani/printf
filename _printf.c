@@ -14,7 +14,7 @@ int _printf(const char *format, ...)
 
 	va_start(argv, format);
 	if (!format || (*format == '%' && !*(format + 1)))
-		count = -1;
+		return (-1);
 	while (format && *(format + format_len))
 	{
 		current_char = *(format + format_len);
