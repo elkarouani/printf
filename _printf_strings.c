@@ -68,3 +68,36 @@ int _putrstr(char *s)
 
 	return (len);
 }
+
+/**
+ * _putrot13str - prints a string in rot13
+ * @s: the string to be printed
+ *
+ * Return: number of characters printed
+ */
+int _putrot13str(char *s)
+{
+	int len, i;
+	char brot13[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	char arot13[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
+
+	for (len = 0; *(s + len); len++)
+	{
+		if (*(s + len) < 'A')
+			_putchar(*(s + len));
+		else if (*(s + len) > 'Z' && *(s + len) < 'a')
+			_putchar(*(s + len));
+		else if (*(s + len) > 'z')
+			_putchar(*(s + len));
+		else
+		{
+			for (i = 0; i <= 52; i++)
+			{
+				if (*(s + len) == brot13[i])
+					_putchar(arot13[i]);
+			}
+		}
+	}
+
+	return (len);
+}

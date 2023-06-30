@@ -113,6 +113,9 @@ int _printf_with_strings_spec(va_list argv, char spec)
 		case 'r':
 			count = _putrstr(va_arg(argv, char *));
 			break;
+		case 'R':
+			count = _putrot13str(va_arg(argv, char *));
+			break;
 	}
 
 	return (count);
