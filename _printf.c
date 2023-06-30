@@ -9,7 +9,7 @@
 int _printf(const char *format, ...)
 {
 	int format_len = 0, current_count = 0, count = 0;
-	char current_char, conversion_spec;
+	char current_char, conversion_spec, after_spec;
 	va_list argv;
 
 	va_start(argv, format);
@@ -19,6 +19,7 @@ int _printf(const char *format, ...)
 	{
 		current_char = *(format + format_len);
 		conversion_spec = *(format + format_len + 1);
+		after_spec = *(format + format_len + 2);
 		if (current_char != '%' || !conversion_spec)
 		{
 			if (current_char != '%')
@@ -39,8 +40,10 @@ int _printf(const char *format, ...)
 		{
 			count += current_count;
 			format_len++;
-			if (is_flag(conversion_spec))
+			if (is_flag(conversion_spec) && !is_flag(after_spec))
 				format_len++;
+			if (is_flag(conversion_spec) && is_flag(after_spec))
+				format_len += 2;
 		}
 		format_len++;
 	}
