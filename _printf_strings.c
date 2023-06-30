@@ -62,7 +62,7 @@ int _putrstr(char *s)
 	while (*(s + len))
 		len++;
 
-	while ((len - i) > 0)
+	while ((len - i) > -1)
 		_putchar(*(s + len - i++));
 
 	return (len);
