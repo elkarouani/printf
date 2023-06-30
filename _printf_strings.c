@@ -20,7 +20,8 @@ int _putchar(char c)
  */
 int _putstr(char *s, int npc_to_hex)
 {
-	int len = 0, count = 0;
+	int len = 0, count = 0, hex_count = 0;
+	char hex;
 
 	while (*(s + len))
 	{
@@ -30,9 +31,17 @@ int _putstr(char *s, int npc_to_hex)
 			count += _putchar(*(s + len++));
 		else
 		{
+			hex = (unsigned int)(*(s + len));
+			while (hex / 16)
+			{
+				hex = hex / 16;
+				hex_count++;
+			}
+
 			count += _putchar('\\');
 			count += _putchar('x');
-			count += _putchar('0');
+			if (hex_count > 0)
+				count += _putchar('0');
 			count += _printf_hex(*(s + len++), 1);
 		}
 	}
