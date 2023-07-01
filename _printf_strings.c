@@ -20,7 +20,7 @@ int _putchar(char c)
  */
 int _putstr(char *s, int npc_to_hex)
 {
-	int len = 0, count = 0;;
+	int len = 0, count = 0;
 
 	while (*(s + len))
 	{
@@ -76,7 +76,7 @@ int _putrstr(char *s)
 		len++;
 
 	i = len - 1;
-	while (i >= 0) 
+	while (i >= 0)
 		_putchar(*(s + i--));
 
 	return (len);

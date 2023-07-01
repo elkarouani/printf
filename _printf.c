@@ -42,8 +42,6 @@ int _printf(const char *format, ...)
 			format_len++;
 			if (is_flag(conversion_spec) && !is_flag(after_spec))
 				format_len++;
-			if (is_flag(conversion_spec) && is_flag(after_spec))
-				format_len += 2;
 		}
 		format_len++;
 	}
